@@ -7,6 +7,7 @@ import login from "@/pages/login";
 import foodlist from '@/pages/foodlist'
 import orderlist from '@/pages/orderlist'
 import adminlist from '@/pages/adminlist'
+import addshop from '@/pages/addshop'
 Vue.use(Router);
 export const constantRouterMap = [
   {
@@ -65,6 +66,16 @@ export const constantRouterMap = [
         meta: {
           title: "管理员列表",
           type: "数据管理"
+        }
+      },
+      {
+        //子路由
+        path: "addshop",
+        component: addshop,
+        name: "addshop",
+        meta: {
+          title: "添加商铺",
+          type: "添加数据"
         }
       },
     ]

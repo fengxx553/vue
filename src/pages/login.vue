@@ -29,8 +29,9 @@ export default {
          message: '登录成功',
          type: 'success'
        });
-       this.$router.push({path:'/'})
-      this.$store.dispatch("getadmininfo")
+      this.$router.push({path:'/'})
+      this.$store.dispatch('getadmininfo')
+      this.$store.dispatch('getLongitude')
     }
   }
   }
