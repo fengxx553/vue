@@ -9,6 +9,16 @@ import orderlist from '@/pages/orderlist'
 import adminlist from '@/pages/adminlist'
 import addshop from '@/pages/addshop'
 Vue.use(Router);
+export const icon = [
+  {
+    name: "数据管理",
+    icon: 'el-icon-s-order'
+  },
+  {
+    name: "添加数据",
+    icon: 'el-icon-plus'
+  }
+]
 export const constantRouterMap = [
   {
     path: "/",

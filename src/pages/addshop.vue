@@ -7,7 +7,7 @@
             <el-form-item label="详细地址">
                 <el-input v-model="form.address" class="input_with" @focus="getadderss"></el-input>
                 <br/>
-                <span class="span_title">当前城市：{{ $store.state.userinfo.data.city }}</span>
+                <span class="span_title">当前城市：{{ $store.state.userinfo.city }}</span>
             </el-form-item>
             <el-form-item label="联系电话">
                 <el-input v-model="form.phone" class="input_with"></el-input>
