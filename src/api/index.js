@@ -64,3 +64,5 @@ export const getuserlist = (offset, limit) =>
 export const getusercount = () =>req({url:`${url}/v1/users/count`,method:"get"})
 export const getordercount = () =>req({url:`${url}/bos/orders/count`,method:"get"})
 export const getadminconut = () =>req({url:`${url}/admin/count`,method:"get"})
+export const getadderss=(latitude, longitude)=>req({url:`${url}/v2/pois/${latitude},${longitude}`})
+export const addshop=(data)=>req({url:`${url}/shopping/addshop`,method:"post",data})
