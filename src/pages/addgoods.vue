@@ -58,6 +58,7 @@ export default {
     background-color: #f9fafc;
     height: 185px;
     width: 100%;
+    overflow:hidden;
 }
 .input_width {
     width: 400px;
@@ -103,11 +104,11 @@ export default {
     }
 }
 .fade-enter-active, .fade-leave-active {
-    transition: all 3s;
+  animation: height 3s;
+  
 }
 .fade-leave-active,.fade-enter-active {
-    transition: height 3s reverse;
-  
+  animation: height 3s reverse;
 }
 </style>
 <style >
