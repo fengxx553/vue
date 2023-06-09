@@ -24,7 +24,6 @@
                     </el-form>
                 </div>
             </transition>
-                   
             <div class="container">
                 <i class="el-icon-caret-bottom" v-if="!is_foodtypeform"></i>
                 <i class="el-icon-caret-top" v-else></i>
@@ -83,7 +82,7 @@ export default {
 .card1 {
     width: 800px;
     position: relative;
-    top: 0;
+    top: 5px;
     left: 50%;
     transform: translate(-50%, 0%);
 }
@@ -95,7 +94,7 @@ export default {
     margin-left: 110px;
     /* margin-top: -5px; */
 }
-@keyframes height {
+@keyframes heights {
     0% {
         height: 0px;
     }
@@ -103,12 +102,12 @@ export default {
         height: 185px;
     }
 }
-.fade-enter-active, .fade-leave-active {
-  animation: height 3s;
-  
+.fade-enter-active
+{
+    animation: heights .5s;
 }
-.fade-leave-active,.fade-enter-active {
-  animation: height 3s reverse;
+.fade-leave-active {
+    animation: heights .5s reverse;
 }
 </style>
 <style >
