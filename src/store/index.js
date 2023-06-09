@@ -31,6 +31,7 @@ const store = new Vuex.Store({
       }
     },
     initrouters({commit,state}) {
+      state.routerslist=[];
     let res= routerlist(state.routers,state.icon)
     commit("INITROUTERS", res)
   },

@@ -20,7 +20,6 @@ export const routerlist = (a,b) => {
       arrs.map(i => {
         if (type === i.uname) {
           i.children.push(item);
-          console.log(i.children);
         }
       });
     }

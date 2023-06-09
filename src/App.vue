@@ -17,4 +17,8 @@ export default {
   position: fixed;
   z-index: 500;
 }
+.container {
+  display: flex;
+  justify-content: center;
+}
 </style>

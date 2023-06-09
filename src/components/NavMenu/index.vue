@@ -1,6 +1,6 @@
 <template>
     <div class="menu">
-        <el-menu router="true" default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+        <el-menu :router=true default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
             :collapse="false" id="frozen-section" >
             <el-menu-item index="/">
                 <i class="el-icon-menu"></i>

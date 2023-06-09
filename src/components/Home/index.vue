@@ -3,9 +3,9 @@
         <NavMenu />
         <div class="riger">
             <breadcrumb />
-            <el-card shadow="always" class="card">
+            <div class="card">
                 <router-view></router-view>
-            </el-card>
+            </div>
         </div>
     </div>
 </template>

@@ -8,6 +8,7 @@ import foodlist from '@/pages/foodlist'
 import orderlist from '@/pages/orderlist'
 import adminlist from '@/pages/adminlist'
 import addshop from '@/pages/addshop'
+import addgoods from '@/pages/addgoods'
 Vue.use(Router);
 export const icon = [
   {
@@ -88,13 +89,25 @@ export const constantRouterMap = [
           type: "添加数据"
         }
       },
+      {
+        //子路由
+        path: "addgoods",
+        component: addgoods,
+        name: "addgoods",
+        meta: {
+          title: "添加商品",
+          type: "添加数据"
+        }
+      },
+      
     ]
   },
   {
     path: "/login",
     component: login,
     name: "login"
-  }
+  },
+  
 ];
 
 export const router = new Router({

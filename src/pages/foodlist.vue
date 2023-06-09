@@ -55,7 +55,8 @@
                 </el-form-item>
                 <el-form-item label="食品食品分类">
                     <el-select v-model="form.menu.id" size="mini">
-                        <el-option v-for="item in selection" :key="item.id" :label="item.name" :value="item.id" class="select">
+                        <el-option v-for="item in selection" :key="item.id" :label="item.name" :value="item.id"
+                            class="select">
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -69,7 +70,8 @@
                 <el-form-item>
                     <el-table border size="mini" :data="form.specfoods">
                         <el-table-column label="规格" prop="specs_name"> </el-table-column>
-                        <el-table-column label="包装费" prop="packing_fee"> </el-table-column>
+                        <el-table-column label="包装费" prop="packing_fee">
+                        </el-table-column>
                         <el-table-column label="价格" prop="price"> </el-table-column>
                         <el-table-column label="操作">
                             <template #default="{ row }">
@@ -77,11 +79,17 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                    <el-button type="primary" @click="opengform" class="btn">添加规格</el-button>
+
+                    <div class="container">
+                        <el-button type="primary" @click="opengform" class="btn">添加规格</el-button>
+                    </div>
                 </el-form-item>
             </el-form>
-            <el-button type="primary" class="btn1" @click="updata">确定</el-button>
-            <el-button class="btn1" @click="dialogFormVisible = false">取消</el-button>
+
+            <div class="container-right">
+                <el-button type="primary" class="btn1" @click="updata">确定</el-button>
+                <el-button class="btn1" @click="dialogFormVisible = false">取消</el-button>
+            </div>
         </el-dialog>
         <el-dialog :visible.sync="dialogFormVisible1" title="添加规格">
             <el-form :model="gform" label-width="80">
@@ -89,20 +97,22 @@
                     <el-input v-model="gform.specs_name" class="input"></el-input>
                 </el-form-item>
                 <el-form-item label="包装费">
-                    <el-input-number v-model="gform.packing_fee" :min=0 :max=5000></el-input-number>
+                    <el-input-number v-model="gform.packing_fee" :min="0" :max="5000"></el-input-number>
                 </el-form-item>
                 <el-form-item label="价格">
-                    <el-input-number v-model="gform.price" :min=0 :max=5000></el-input-number>
+                    <el-input-number v-model="gform.price" :min="0" :max="5000"></el-input-number>
                 </el-form-item>
             </el-form>
-            <el-button type="primary" class="btn1" @click="closegform">确定</el-button>
-            <el-button class="btn1" @click="dialogFormVisible1 = false">取消</el-button>
+            <div class="container-right">
+                <el-button type="primary" class="btn1" @click="closegform">确定</el-button>
+                <el-button class="btn1" @click="dialogFormVisible1 = false">取消</el-button>
+            </div>
         </el-dialog>
     </div>
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 export default {
     data() {
         return {
@@ -111,30 +121,30 @@ export default {
             tabledata: [],
             form: { menu: {} },
             gform: {
-                specs_name: '',
+                specs_name: "",
                 packing_fee: 1,
                 price: 20,
             },
             selection: [],
             dialogFormVisible: false,
             dialogFormVisible1: false,
-            count:0,
+            count: 0,
         };
     },
     methods: {
         handleCurrentChange(val) {
-      this.offset = (val - 1) * this.limit;
-      this.getfooddata()
-    },
+            this.offset = (val - 1) * this.limit;
+            this.getfooddata();
+        },
         async deletefood(row) {
             try {
-                let res = await this.$API.deletefood(row.item_id)
+                let res = await this.$API.deletefood(row.item_id);
                 this.$message({
-                    type: 'success',
-                    message: res.data.message
-                })
+                    type: "success",
+                    message: res.data.message,
+                });
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         },
 
@@ -142,7 +152,7 @@ export default {
             // let restaurant_address = this.form.restaurant.address
             // let restaurant_name = this.form.restaurant.name
             // let new_category_id = this.form.menu.id
-            // let { category_id, category_name, description, image_path, index, item_id, 
+            // let { category_id, category_name, description, image_path, index, item_id,
             //     month_sales, name, rating, restaurant_id, specfoods } = this.form
             // let specs = specfoods.map(item => {
             //     return {
@@ -159,24 +169,30 @@ export default {
             let { restaurant, menu, ...rest } = this.form;
             let { id: new_category_id } = menu;
             let { specfoods, ...item } = rest;
-            let specs = specfoods.map(({ specs_name, packing_fee, price }) => ({ specs: specs_name, packing_fee, price }));
-            let data = { ...item, specs, new_category_id, restaurant_name: restaurant.name, restaurant_address: restaurant.address };
+            let specs = specfoods.map(({ specs_name, packing_fee, price }) => ({
+                specs: specs_name,
+                packing_fee,
+                price,
+            }));
+            let data = {
+                ...item,
+                specs,
+                new_category_id,
+                restaurant_name: restaurant.name,
+                restaurant_address: restaurant.address,
+            };
 
             try {
-                await this.$API.setfoods(data)
+                await this.$API.setfoods(data);
                 this.$message({
-                    type: 'success',
-                    message: '成功'
-                })
+                    type: "success",
+                    message: "成功",
+                });
                 this.dialogFormVisible = false;
                 this.getfooddata();
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-
-
-
-
         },
         async getfooddata() {
             let { offset, limit, restaurant_id } = this;
@@ -204,7 +220,7 @@ export default {
                 console.error(error);
             }
         },
-        async zhankai(a,key) {
+        async zhankai(a, key) {
             if (key.length !== 0) {
                 let data = await this.getshoppingrestaurant(a);
                 let { restaurant, menu } = data;
@@ -241,8 +257,8 @@ export default {
             return copy;
         },
         async editor(row) {
-            this.form = { menu: {} }
-            await this.zhankai(row,[{}]);
+            this.form = { menu: {} };
+            await this.zhankai(row, [{}]);
             this.dialogFormVisible = true;
             await this.getmenulist(row);
             this.form = this.deepCopy(row);
@@ -264,30 +280,32 @@ export default {
         },
         opengform() {
             this.gform = {
-                specs_name: '',
+                specs_name: "",
                 packing_fee: 1,
                 price: 20,
-            }
-            this.dialogFormVisible1 = true
+            };
+            this.dialogFormVisible1 = true;
         },
         deletespecfood(row) {
-            this.form.specfoods = this.form.specfoods.filter(item => item._id != row._id)
+            this.form.specfoods = this.form.specfoods.filter(
+                (item) => item._id != row._id
+            );
         },
         closegform() {
-            this.form.specfoods.push({ _id: uuidv4(), ...this.gform })
-            this.dialogFormVisible1 = false
+            this.form.specfoods.push({ _id: uuidv4(), ...this.gform });
+            this.dialogFormVisible1 = false;
         },
-        getshoppingcount(){
-            this.$API.getshoppingcount().then(res=>{
-                if(res.status==200){
-                    this.count=res.data.count
+        getshoppingcount() {
+            this.$API.getshoppingcount().then((res) => {
+                if (res.status == 200) {
+                    this.count = res.data.count;
                 }
-            })
-        }
+            });
+        },
     },
     mounted() {
         this.getfooddata();
-        this. getshoppingcount()
+        this.getshoppingcount();
     },
 };
 </script>
@@ -339,17 +357,11 @@ export default {
     width: 50%;
 }
 
-.btn {
-    position: relative;
-    left: 40%;
-    top: 20px;
+.select {
+    width: 100px;
 }
-
-.btn1 {
-    position: relative;
-    left: 440px;
-}
-.select{
-   width: 100px;
+.container-right {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
