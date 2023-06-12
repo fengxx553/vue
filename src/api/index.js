@@ -69,3 +69,4 @@ export const addshop=(data)=>req({url:`${url}/shopping/addshop`,method:"post",da
 export const setclassform=(data)=>req({url:`${url}/shopping/addcategory`,method:"post",data})
 export const getcategory=(id)=>req({url:`${url}/shopping/getcategory/${id}`,method:"get"})
 export const addgoods=(data)=>req({url:`${url}/shopping/addfood`,method:"post",data})
+export const getcitycount=()=>req({url:`${url}/v1/user/city/count`,method:"get"})

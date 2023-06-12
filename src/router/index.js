@@ -9,6 +9,9 @@ import orderlist from '@/pages/orderlist'
 import adminlist from '@/pages/adminlist'
 import addshop from '@/pages/addshop'
 import addgoods from '@/pages/addgoods'
+import bingtu from '@/pages/bingtu'
+import bianjikuang from '@/pages/bianjikuang'
+import shezhi from '@/pages/shezhi'
 Vue.use(Router);
 export const icon = [
   {
@@ -18,6 +21,18 @@ export const icon = [
   {
     name: "添加数据",
     icon: 'el-icon-plus'
+  },
+  {
+    name: "图表",
+    icon: 'el-icon-star-on'
+  },
+  {
+    name: "编辑",
+    icon: 'el-icon-edit'
+  },
+  {
+    name: "设置",
+    icon: 'el-icon-s-tools'
   }
 ]
 export const constantRouterMap = [
@@ -97,6 +112,36 @@ export const constantRouterMap = [
         meta: {
           title: "添加商品",
           type: "添加数据"
+        }
+      },
+      {
+        //子路由
+        path: "bingtu",
+        component: bingtu,
+        name: "bingtu",
+        meta: {
+          title: "用户分布",
+          type: "图表"
+        }
+      },
+      {
+        //子路由
+        path: "bianjikuang",
+        component: bianjikuang,
+        name: "bianjikuang",
+        meta: {
+          title: "文本编辑",
+          type: "编辑"
+        }
+      },
+      {
+        //子路由
+        path: "shezhi",
+        component: shezhi,
+        name: "shezhi",
+        meta: {
+          title: "管理员设置",
+          type: "设置"
         }
       },
       
