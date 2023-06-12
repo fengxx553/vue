@@ -40,7 +40,7 @@
       <el-table-column label="操作">
         <template #default="{ row }">
           <el-button type="primary" size="mini" @click="setshopping(row)">编辑</el-button>
-          <el-button type="success" size="mini">添加商品</el-button>
+          <el-button type="success" size="mini" @click="toaddgoods(row)">添加商品</el-button>
           <el-button type="danger" size="mini" @click="deleteshopping(row)">删除</el-button>
         </template>
       </el-table-column>
@@ -179,6 +179,12 @@ export default {
       this.offset = (val - 1) * this.limit;
       this.getLongitude()
     },
+    toaddgoods(row){
+      this.$router.push({
+        name: 'addgoods',
+        params:row
+      })
+    }
   },
   mounted() {
     this.getLongitude()

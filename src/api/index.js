@@ -66,3 +66,6 @@ export const getordercount = () =>req({url:`${url}/bos/orders/count`,method:"get
 export const getadminconut = () =>req({url:`${url}/admin/count`,method:"get"})
 export const getadderss=(latitude, longitude)=>req({url:`${url}/v2/pois/${latitude},${longitude}`})
 export const addshop=(data)=>req({url:`${url}/shopping/addshop`,method:"post",data})
+export const setclassform=(data)=>req({url:`${url}/shopping/addcategory`,method:"post",data})
+export const getcategory=(id)=>req({url:`${url}/shopping/getcategory/${id}`,method:"get"})
+export const addgoods=(data)=>req({url:`${url}/shopping/addfood`,method:"post",data})
