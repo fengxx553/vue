@@ -3,10 +3,10 @@ import Vue from "vue";
 //引入vuex
 import Vuex from "vuex";
 Vue.use(Vuex);
-import { constantRouterMap,icon} from "../router/index";
+import { constantRouterMap, icon } from "../router/index";
 import { routerlist } from "../uitll/index";
-import { getadmininfo,getLongitude } from "@/api";
-import { setSession,getSession } from "@/uitll/session.js";
+import { getadmininfo, getLongitude, outuser } from "@/api";
+import { setSession, getSession } from "@/uitll/session.js";
 //实例化vuex
 //创建vuex实例
 const store = new Vuex.Store({
@@ -14,8 +14,8 @@ const store = new Vuex.Store({
     icon: icon,
     routers: constantRouterMap, //存储路由
     userinfo: getSession("userinfo"),
-    longitudes:getSession("longitudes"),
-    routerslist: [], 
+    longitudes: getSession("longitudes"),
+    routerslist: [],
   },
   actions: {
     async getadmininfo({ commit }) {
@@ -30,28 +30,35 @@ const store = new Vuex.Store({
         commit("GETLONGITUDE", res.data);
       }
     },
-    initrouters({commit,state}) {
-      state.routerslist=[];
-    let res= routerlist(state.routers,state.icon)
-    commit("INITROUTERS", res)
-  },
-},
+    initrouters({ commit, state }) {
+      state.routerslist = [];
+      let res = routerlist(state.routers, state.icon)
+      commit("INITROUTERS", res)
+    },
+    async outuser({ commit }) {
+      commit("OUTUSER")
+    },},
 
-  getters: {},
-  mutations: {
-    GETADMININFO(state, data) {
-      // state.userinfo = data;
-      setSession("userinfo", data.data);
-    },
-    GETLONGITUDE(state, data) {
-      // state.longitudes = data;
-      setSession("longitudes", data);
-      console.log(getSession("userinfo"));
-    },
-    INITROUTERS(state, data) {
-      state.routerslist=data;
-  }
-}
-});
+    getters: {},
+    mutations: {
+      OUTUSER(state) {
+        sessionStorage.clear();
+        state.userinfo = {};
+        state.longitudes = {};
+      },
+      GETADMININFO(state, data) {
+        // state.userinfo = data;
+        setSession("userinfo", data.data);
+      },
+      GETLONGITUDE(state, data) {
+        // state.longitudes = data;
+        setSession("longitudes", data);
+        console.log(getSession("userinfo"));
+      },
+      INITROUTERS(state, data) {
+        state.routerslist = data;
+      }
+    }
+  });
 
 export default store;

@@ -3,21 +3,21 @@
     <h2 class="header">管理员信息</h2>
     <el-card shadow="never" class="card1">
       <ul>
-        <li>姓名：</li>
-        <li>注册时间：</li>
-        <li>管理员权限：</li>
-        <li>管理员ID：</li>
+        <li>姓名：{{ userinfo.user_name }}</li>
+        <li>注册时间：{{ userinfo.create_time }}</li>
+        <li>管理员权限：{{ userinfo.admin }}</li>
+        <li>管理员ID：{{ userinfo.id }}</li>
         <li>更换头像：</li>
         <div class="imgs">
           <el-upload
             class="avatar-uploader"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="https://elm.cangdu.org/v1/addimg/avatar"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
             list-type="picture-card"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="userinfo.avatar" :src="`https://elm.cangdu.org/img/${userinfo.avatar}`" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </div>
@@ -27,15 +27,16 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
-    return { imageUrl: "" };
+    return { };
   },
   components: {},
   mounted() {},
   methods: {
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    handleAvatarSuccess(res, file){
+      this.$store.dispatch('getadmininfo')
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -50,6 +51,9 @@ export default {
       return isJPG && isLt2M;
     },
   },
+  computed:{
+    ...mapState(['userinfo'])
+  }
 };
 </script>
 <style scoped>
@@ -81,14 +85,14 @@ li {
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
+    width: 146px;
+    height: 146px;
+    line-height: 146px;
     text-align: center;
   }
   .avatar {
-    width: 80px;
-    height: 80px;
+    width: 146px;
+    height: 146px;
     display: block;
   }
 </style>

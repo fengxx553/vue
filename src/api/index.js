@@ -70,3 +70,5 @@ export const setclassform=(data)=>req({url:`${url}/shopping/addcategory`,method:
 export const getcategory=(id)=>req({url:`${url}/shopping/getcategory/${id}`,method:"get"})
 export const addgoods=(data)=>req({url:`${url}/shopping/addfood`,method:"post",data})
 export const getcitycount=()=>req({url:`${url}/v1/user/city/count`,method:"get"})
+
+export const outuser=()=>req({url:`${url}/admin/singout`,method:"get"})
