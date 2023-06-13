@@ -12,6 +12,7 @@ import addgoods from '@/pages/addgoods'
 import bingtu from '@/pages/bingtu'
 import bianjikuang from '@/pages/bianjikuang'
 import shezhi from '@/pages/shezhi'
+import store from "@/store";
 Vue.use(Router);
 export const icon = [
   {
@@ -158,4 +159,19 @@ export const constantRouterMap = [
 export const router = new Router({
   routes: constantRouterMap
 });
+router.beforeEach((to, from,next) => {
+  if(store.state.userinfo != null||store.state.userinfo != undefined){
+      if(to.name=="login"){
+        next({path:"/"})
+      }else{
+        next()
+      }
+  }else{
+   if(to.name != "login"){
+    next({path:'/login'})
+   }else{
+    next()
+   }
+  }
+})
 

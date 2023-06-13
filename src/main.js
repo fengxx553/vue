@@ -11,7 +11,6 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$API = API,
 /* eslint-disable no-new */
-API.getadmininfo()
 new Vue({
   el: '#app',
   router,

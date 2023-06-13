@@ -3,7 +3,7 @@ import Vue from "vue";
 //引入vuex
 import Vuex from "vuex";
 Vue.use(Vuex);
-import { constantRouterMap, icon } from "../router/index";
+import { constantRouterMap, icon,router } from "@/router";
 import { routerlist } from "../uitll/index";
 import { getadmininfo, getLongitude, outuser } from "@/api";
 import { setSession, getSession } from "@/uitll/session.js";
@@ -11,8 +11,6 @@ import { setSession, getSession } from "@/uitll/session.js";
 //创建vuex实例
 const store = new Vuex.Store({
   state: {
-    icon: icon,
-    routers: constantRouterMap, //存储路由
     userinfo: getSession("userinfo"),
     longitudes: getSession("longitudes"),
     routerslist: [],
@@ -32,7 +30,7 @@ const store = new Vuex.Store({
     },
     initrouters({ commit, state }) {
       state.routerslist = [];
-      let res = routerlist(state.routers, state.icon)
+      let res = routerlist(constantRouterMap, icon)
       commit("INITROUTERS", res)
     },
     async outuser({ commit }) {
@@ -43,17 +41,17 @@ const store = new Vuex.Store({
     mutations: {
       OUTUSER(state) {
         sessionStorage.clear();
-        state.userinfo = {};
-        state.longitudes = {};
+        location.reload();
+        router.push({path:"/login"})
       },
       GETADMININFO(state, data) {
-        // state.userinfo = data;
+        state.userinfo = data.data;
         setSession("userinfo", data.data);
+        router.push({path:"/"})
       },
       GETLONGITUDE(state, data) {
-        // state.longitudes = data;
+        state.longitudes = data;
         setSession("longitudes", data);
-        console.log(getSession("userinfo"));
       },
       INITROUTERS(state, data) {
         state.routerslist = data;
