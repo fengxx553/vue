@@ -8,9 +8,6 @@
       </span>
       <el-popover placement="top-start" trigger="hover" class="popover">
         <router-link to="/" class="span1">首页</router-link>
-        <!-- <router-link to="/login" class="span1" @click="outuser"
-          >退出</router-link
-        > -->
         <span class="span1" @click="outuser">退出</span>
         <span slot="reference"
           ><img
@@ -38,7 +35,6 @@ export default {
         message: "退出成功",
       });
       this.$store.dispatch("outuser");
-      this.$router.push({name:"login"})
     },
   },
 };
@@ -46,8 +42,7 @@ export default {
 
 <style scoped >
 .breadcrumb {
-  background-color: DodgerBlue;
-  width: 100%;
+  width: 85%;
   height: 15px;
   padding: 20px 24px;
   min-width: 0;
@@ -60,9 +55,9 @@ export default {
   border-radius: 50%;
 }
 .popover {
+  float: right;
   position: relative;
-  left: 1445px;
-  top: -15px;
+  top: -14px;
   width: 70px;
 }
 .span1 {

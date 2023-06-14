@@ -1,21 +1,27 @@
-let arrs = [];
+
 // 递归遍历路由表生成左侧菜单
-export const routerlist = (a,b) => {
-  if(!a || !b){
+export const routerlist = (a, b) => {
+  if (!a || !b) {
     console.error("参数为空")
-    return 
+    return
+  } else {
+    const arrs=[]
+    return arr(a,b,arrs)
   }
+  
+};
+function arr(a,b,arrs) {
   a.map(item => {
     if (!item.meta) {
       if (item.children && item.children.length > 0) {
-        routerlist(item.children,b);
+        arr(item.children, b,arrs);
         return;
       }
     } else {
       const { type } = item.meta;
       const index = arrs.findIndex(i => i.uname === type);
       if (index === -1) {
-        arrs.push({ uname: type, children: [],icon:'' });
+        arrs.push({ uname: type, children: [], icon: '' });
       }
       arrs.map(i => {
         if (type === i.uname) {
@@ -24,16 +30,15 @@ export const routerlist = (a,b) => {
       });
     }
   });
-  b.forEach(item1 =>{
+  b.forEach(item1 => {
     arrs.map(i1 => {
-      if(item1.name==i1.uname) {
-      i1.icon=item1.icon;
+      if (item1.name == i1.uname) {
+        i1.icon = item1.icon;
       }
     })
   })
   return arrs;
-};
-
+}
 
 // export const shuzuquchong=(arr)=>{
 //   arr.map(item=>{

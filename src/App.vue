@@ -15,7 +15,7 @@ export default {
 <style>
 #frozen-section {
   position: fixed;
-  z-index: 500;
+  z-index: 50;
 }
 .container {
   display: flex;

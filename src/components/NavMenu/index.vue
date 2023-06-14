@@ -1,20 +1,23 @@
 <template>
-    <div class="menu">
-        <el-menu :router=true default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-            :collapse="false" id="frozen-section" >
-            <el-menu-item index="/">
-                <i class="el-icon-menu"></i>
-                首页
-            </el-menu-item>
-            <el-submenu :index="index + ''" v-for="(item, index) in routerslist" :key="index">
-                <template slot="title">
-                    <i :class="item.icon"></i>
-                    <span slot="title">{{ item.uname }}</span>
-                </template>
-                <el-menu-item :index="list.path" v-for="(list, index) in item.children" :key="index">
-                    {{ list.meta.title }}
+    <div >
+        <el-menu :router=true default-active="$route.path" class="el-menu-vertical-demo" :collapse="false"
+            id="frozen-section" :unique-opened="true" background-color="#545c64" text-color="#fff"
+            active-text-color="#ffd04b" :default-openeds="openeds">
+            <el-scrollbar class="scrollbar" wrap-style="overflow-x:hidden;">
+                <el-menu-item index="/">
+                    <i class="el-icon-menu"></i>
+                    首页
                 </el-menu-item>
-            </el-submenu>
+                <el-submenu :index="index + ''" v-for="(item, index) in routerslist" :key="index">
+                    <template slot="title">
+                        <i :class="item.icon"></i>
+                        <span slot="title">{{ item.uname }}</span>
+                    </template>
+                    <el-menu-item :index="list.path" v-for="(list, index) in item.children" :key="index">
+                        {{ list.meta.title }}
+                    </el-menu-item>
+                </el-submenu>
+            </el-scrollbar>
         </el-menu>
     </div>
 </template>
@@ -25,18 +28,13 @@ import { mapState } from 'vuex';
 export default {
     data() {
         return {
+            openeds: ['0']
         }
     },
     mounted() {
         this.$store.dispatch('initrouters')
     },
     methods: {
-        handleOpen(key, keyPath) {
-            // console.log(key, keyPath);
-        },
-        handleClose(key, keyPath) {
-            // console.log(key, keyPath);
-        }
     },
     //计算属性
     computed: {
@@ -46,17 +44,13 @@ export default {
 </script>
 
 <style scoped >
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    position: relative;
+.scrollbar {
     height: 100vh;
-    min-width: 155px;
+    Overflow: hidden;
 }
 
-.menu {
-    width: 155px;
-}
-
-.el-submenu .el-menu-item {
-    min-width: 100%;
+.el-menu-vertical-demo {
+    width: 200px;
+    height: 100vh
 }
 </style>
