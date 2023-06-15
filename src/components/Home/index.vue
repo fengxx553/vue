@@ -35,7 +35,7 @@ export default {
 }
 
 .riger {
-    width: 85%;
+    width: 90%;
     height: 100%;
 }
 
@@ -46,7 +46,7 @@ export default {
 }
 
 .left-cd {
-    width: 13%;
+    width: 10%;
     height: 100%;
     min-width: 200px;
 }</style>

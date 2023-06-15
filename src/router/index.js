@@ -1,17 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import home from "@/components/Home";
-import userslist from "@/pages/userslist";
-import businesslist from "@/pages/Businesslist";
 import login from "@/pages/login";
-import foodlist from '@/pages/foodlist'
-import orderlist from '@/pages/orderlist'
-import adminlist from '@/pages/adminlist'
-import addshop from '@/pages/addshop'
-import addgoods from '@/pages/addgoods'
-import bingtu from '@/pages/bingtu'
-import bianjikuang from '@/pages/bianjikuang'
-import shezhi from '@/pages/shezhi'
 import store from "@/store";
 Vue.use(Router);
 export const icon = [
@@ -39,7 +28,7 @@ export const icon = [
 export const constantRouterMap = [
   {
     path: "/",
-    component: home,
+    component: () =>import("@/components/home"),
     //重定向
     redirect: "/userslist",
     name: "home",
@@ -48,7 +37,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "userslist",
-        component: userslist,
+        component: () =>import("@/pages/userslist"),
         name: "userslist",
         meta: {
           title: "用户列表",
@@ -58,7 +47,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "businesslist",
-        component: businesslist,
+        component: () =>import("@/pages/Businesslist"),
         name: "businesslist",
         meta: {
           title: "商家列表",
@@ -68,7 +57,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "foodlist",
-        component: foodlist,
+        component: import("@/pages/foodlist"),
         name: "foodlist",
         meta: {
           title: "食品列表",
@@ -78,7 +67,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "orderlist",
-        component: orderlist,
+        component: () =>import("@/pages/orderlist"),
         name: "orderlist",
         meta: {
           title: "订单列表",
@@ -88,7 +77,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "adminlist",
-        component: adminlist,
+        component:() => import("@/pages/adminlist"),
         name: "adminlist",
         meta: {
           title: "管理员列表",
@@ -98,7 +87,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "addshop",
-        component: addshop,
+        component: () =>import("@/pages/addshop"),
         name: "addshop",
         meta: {
           title: "添加商铺",
@@ -108,7 +97,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "addgoods",
-        component: addgoods,
+        component:() => import("@/pages/addgoods"),
         name: "addgoods",
         meta: {
           title: "添加商品",
@@ -118,7 +107,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "bingtu",
-        component: bingtu,
+        component:() => import("@/pages/bingtu"),
         name: "bingtu",
         meta: {
           title: "用户分布",
@@ -128,7 +117,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "bianjikuang",
-        component: bianjikuang,
+        component:() =>import("@/pages/bianjikuang"),
         name: "bianjikuang",
         meta: {
           title: "文本编辑",
@@ -138,7 +127,7 @@ export const constantRouterMap = [
       {
         //子路由
         path: "shezhi",
-        component: shezhi,
+        component:() => import("@/pages/shezhi"),
         name: "shezhi",
         meta: {
           title: "管理员设置",
@@ -158,6 +147,10 @@ export const constantRouterMap = [
 export const router = new Router({
   routes: constantRouterMap
 });
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 router.beforeEach((to, from,next) => {
   if(store.state.userinfo != null||store.state.userinfo != undefined){
       if(to.name=="login"){

@@ -42,10 +42,11 @@ export default {
 
 <style scoped >
 .breadcrumb {
-  width: 85%;
+  width: 87%;
   height: 15px;
   padding: 20px 24px;
   min-width: 0;
+  background-color: #f5f7fa;
 }
 
 .img {
